@@ -1,6 +1,8 @@
 body {
-  padding: 50px;
+  padding: 0;
+  margin: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #ffff9d;
 }
 
 a {
@@ -9,4 +11,19 @@ a {
 
 #map {
   height: 500px;
+}
+
+.menu-bar {
+  padding: 0;
+  background-color: #00a388;
+  margin: 0;
+}
+
+.menu-bar,
+a {
+  text-decoration: none;
+  color: #beeb9f;
+  font-size: 30px;
+  text-align: center;
+  padding: 20px;
 }
