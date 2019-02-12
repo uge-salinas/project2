@@ -4,6 +4,7 @@ const router = express.Router();
 const User = require("../models/User");
 const Parcela = require("../models/Parcela");
 const ensureLogin = require("connect-ensure-login");
+const key = process.env.KEYMAP;
 
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
@@ -65,7 +66,7 @@ router.post("/login", passport.authenticate("local", {
 
 //MEMBER'S SITE
 
-router.get("/member", ensureLogin.ensureLoggedIn(), (req, res, next) => res.render("auth/member"))
+router.get("/member", ensureLogin.ensureLoggedIn(), (req, res, next) => res.render("auth/member", { key }))
 
 router.post("/member", (req, res, next) => {
   const tipo = req.body.tipo;
