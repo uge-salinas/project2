@@ -1,14 +1,11 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
 a {
-  color: #00b7ff;
-}
+  color: #00b7ff; }
 
 #map {
-  height: 500px;
-}
+  height: 500px; }
 
 /*# sourceMappingURL=style.css.map */

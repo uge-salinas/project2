@@ -21,8 +21,8 @@ var theMap = new google.maps.Map(mapDOM, {
   zoom: 20,
   center: coordinates
 });
-
-var myTerritory = [];
+var markers = [];
+var myTerritory = []; //inicializar lista a cero, para borrar coordenadas
 var myTerritoryPolygon;
 
 theMap.addListener("click", function(e) {
@@ -30,13 +30,14 @@ theMap.addListener("click", function(e) {
     lat: e.latLng.lat(),
     lng: e.latLng.lng()
   };
-
-  new google.maps.Marker({
+  // console.log(coords);
+  let marker = new google.maps.Marker({
     map: theMap,
     position: coords
   });
 
   myTerritory.push(coords);
+  markers.push(marker);
 
   if (myTerritory.length > 2) {
     myTerritoryPolygon.setMap(null);
@@ -53,9 +54,22 @@ theMap.addListener("click", function(e) {
 
   myTerritoryPolygon.setMap(theMap);
 
-  if (myTerritory.length > 0) {
+  if (myTerritory.length > 1) {
     console.log(
       google.maps.geometry.spherical.computeArea(myTerritoryPolygon.getPath())
     );
   }
+  document.getElementById("clear-button").onclick = function() {
+    myTerritoryPolygon.setMap(null);
+    myTerritory = null;
+
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].setMap(null);
+    }
+    // theMap = new google.maps.Map(mapDOM, {
+    //   zoom: 20,
+    //   center: myTerritory[myTerritory.length - 1]
+    // });
+    myTerritory = [];
+  };
 });
