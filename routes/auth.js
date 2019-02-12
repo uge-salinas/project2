@@ -2,6 +2,7 @@ const express = require("express");
 const passport = require('passport');
 const router = express.Router();
 const User = require("../models/User");
+const Parcela = require("../models/Parcela");
 const ensureLogin = require("connect-ensure-login");
 
 // Bcrypt to encrypt passwords
@@ -66,6 +67,23 @@ router.post("/login", passport.authenticate("local", {
 
 router.get("/member", ensureLogin.ensureLoggedIn(), (req, res, next) => res.render("auth/member"))
 
+router.post("/member", (req, res, next) => {
+  const tipo = req.body.tipo;
+  const dimensiones = req.body.dimensiones;
+  const venta = req.body.venta;
+  const precio = req.body.precio;
+
+  const nuevaParcela = new Parcela({
+    tipo,
+    dimensiones,
+    venta,
+    precio
+  })
+
+  nuevaParcela.save()
+    .then(() => res.redirect("/"))
+    .catch(err => console.log(err))
+})
 
 //LOG OUT
 
