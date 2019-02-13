@@ -26,77 +26,72 @@ var markers = [];
 var myTerritory = []; //inicializar lista a cero, para borrar coordenadas
 var myTerritoryPolygon;
 
-// Josevi begin
-function resetPolygon(polygon) {
-  polygon.setMap(null);
-}
+const deleteMarker = marker => marker.setMap(null);
+const deletePolygon = polygon => polygon.setMap(null);
 
-function drawPolygon(markersList, currentPolygon) {
+function drawPolygon(coordsList, map, currentPolygon) {
   if (currentPolygon) {
-    resetPolygon(currentPolygon);
+    deletePolygon(currentPolygon);
   }
 
   const newPolygon = new google.maps.Polygon({
-    paths: markersList,
+    paths: coordsList,
     strokeColor: "#FF0000",
     strokeOpacity: 0.8,
     strokeWeight: 2,
     fillColor: "#FFcc00",
     fillOpacity: 0.35
   });
+  newPolygon.setMap(map);
   return newPolygon;
 }
 
-// function onMarkerDragEnd(event) {
+function onMarkerDragEnd() {
+  const markerCoords = extractCoords(markers);
+  myTerritoryPolygon = drawPolygon(markerCoords, theMap, myTerritoryPolygon);
+}
 
-// }
-// Josevi end
+function extractCoords(markers) {
+  return markers.map(marker => marker.getPosition().toJSON());
+}
+
+function toggleBounce(marker) {
+  if (marker.getAnimation() !== null) {
+    marker.setAnimation(null);
+  } else {
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+  }
+}
 
 theMap.addListener("click", function(e) {
-  let coords = {
+  const coords = {
     lat: e.latLng.lat(),
     lng: e.latLng.lng()
   };
-  let marker = new google.maps.Marker({
+
+  const marker = new google.maps.Marker({
     map: theMap,
     position: coords,
-    animation: google.maps.Animation.DROP,
+    // animation: google.maps.Animation.DROP,
     draggable: true
   });
 
-  marker.addListener("dragend", function(event) {
-    console.log(markers.map(marker => marker.getPosition().toJSON()));
-  });
-
-  myTerritory.push(coords);
+  marker.addListener("dragend", onMarkerDragEnd);
+  // marker.addListener("click", () => toggleBounce(marker));
   markers.push(marker);
 
-  if (myTerritory.length > 2) {
-    //reinicia el ultimo poligono dibujado
-    myTerritoryPolygon.setMap(null);
-  }
+  const markerCoords = extractCoords(markers);
+  myTerritoryPolygon = drawPolygon(markerCoords, theMap, myTerritoryPolygon);
 
-  myTerritoryPolygon = new google.maps.Polygon({
-    paths: myTerritory,
-    strokeColor: "#FF0000",
-    strokeOpacity: 0.8,
-    strokeWeight: 2,
-    fillColor: "#FFcc00",
-    fillOpacity: 0.35
-  });
-
-  myTerritoryPolygon.setMap(theMap);
-
-  if (myTerritory.length > 1) {
+  if (markers.length > 1) {
     console.log(
       google.maps.geometry.spherical.computeArea(myTerritoryPolygon.getPath())
     );
   }
-  document.getElementById("clear-button").onclick = function() {
-    myTerritoryPolygon.setMap(null);
-    myTerritory = [];
-    for (var i = 0; i < markers.length; i++) {
-      markers[i].setMap(null);
-    }
-  };
 });
+
+document.getElementById("clear-button").onclick = function() {
+  deletePolygon(myTerritoryPolygon);
+  markers.map(deleteMarker);
+  markers = [];
+};
