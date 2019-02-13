@@ -5,7 +5,8 @@ const parcelaSchema = new Schema({
   tipo: String,
   dimensiones: String,
   venta: String,
-  precio: Number
+  precio: Number,
+  coordenadas: Array
 })
 
 const Parcela = mongoose.model("Parcela", parcelaSchema);

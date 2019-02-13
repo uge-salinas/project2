@@ -61,9 +61,11 @@ function calculateArea() {
   if (markers.length > 2) {
     totalArea = google.maps.geometry.spherical.computeArea(myTerritoryPolygon.getPath())
     totalArea = (totalArea / 10000).toFixed(2);
-    //console.log(totalArea);
     document.querySelector("#dimensiones").value = totalArea + " hectáreas";
+    document.querySelector("#coordenadas").value = JSON.stringify(extractCoords(markers));
   }
+  let prueba = extractCoords(markers);
+  console.log(prueba);
   return totalArea;
 }
 
