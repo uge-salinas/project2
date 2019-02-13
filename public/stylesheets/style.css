@@ -23,4 +23,7 @@ a {
   text-align: center;
   padding: 20px; }
 
+.vista_parcelas {
+  display: flex; }
+
 /*# sourceMappingURL=style.css.map */
