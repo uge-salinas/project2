@@ -1,0 +1,26 @@
+<div class="vista_parcelas">
+
+  {{#each parcelas}}
+
+
+  <div class="card" style="width: 18rem;">
+    {{!-- <img class="card-img-top" src="85cdca8088322c299b99cde3a64807ae.jpg" alt="Card image cap" /> --}}
+    <div class="card-body">
+      <h5 class="card-title">{{this.dimensiones}}</h5>
+      {{!-- <p class="card-text">
+        Informacion adicional
+      </p> --}}
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">{{this.tipo}}</li>
+      <li class="list-group-item">{{this.venta}}</li>
+      <li class="list-group-item">{{this.precio}}</li>
+    </ul>
+    <div class="card-body">
+      <a href="#" class="card-link">Contacto</a>
+    </div>
+  </div>
+
+  {{/each}}
+
+</div>
