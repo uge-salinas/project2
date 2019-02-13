@@ -111,4 +111,17 @@ router.get("/card", ensureLogin.ensureLoggedIn(), (req, res) => {
   });
 });
 
+//INDIVIDUAL INFO AND MAP
+
+router.get("/card/:id", (req, res, next) => {
+  Parcela.findOne({ "_id": req.params.id })
+    .then((parcela) => {
+      const coordenadas = parcela.coordenadas;
+      console.log(coordenadas)
+      res.render("auth/cardMap", { key, coordenadas: JSON.stringify(coordenadas) })
+    })
+    .catch(err => console.log(err))
+
+})
+
 module.exports = router;
