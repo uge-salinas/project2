@@ -80,12 +80,14 @@ router.post("/member", (req, res, next) => {
   const dimensiones = req.body.dimensiones;
   const venta = req.body.venta;
   const precio = req.body.precio;
+  const coordenadas = JSON.parse(req.body.coordenadas);
 
   const nuevaParcela = new Parcela({
     tipo,
     dimensiones,
     venta,
-    precio
+    precio,
+    coordenadas
   });
 
   nuevaParcela

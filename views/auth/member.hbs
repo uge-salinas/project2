@@ -9,11 +9,6 @@
   <input type="radio" name="tipo" value="secano" id="secano">
   <label for="secano">Secano</label><br>
 
-  <label for="dimensiones">Dimensiones en metros cuadrados</label>
-  <input type="number" name="dimensiones" placeholder="0" id="dimensiones">
-
-  <br>
-
   <label for="venta">Disponible para venta o alquiler?</label>
 
   <input type="radio" name="venta" value="venta" id="venta" checked>
@@ -29,6 +24,12 @@
   <div id="map"></div>
 
 
+  <br>
+  <label for="dimensiones">Dimensiones calculadas (ha)</label>
+  <input type="text" name="dimensiones" id="dimensiones" readonly>
+  <input type="hidden" name="coordenadas" id="coordenadas">
+
+  <br>
   <button>Finalizar</button>
 
 </form>
@@ -36,4 +37,4 @@
 <div id="controls">
   <button id='clear-button'>Borrar marcación</button>
 </div>
-<script src="../javascripts/script.js"></script>
+<script src="../javascripts/drawMap.js"></script>
