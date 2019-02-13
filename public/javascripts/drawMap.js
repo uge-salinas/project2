@@ -49,19 +49,33 @@ function drawPolygon(coordsList, map, currentPolygon) {
 function onMarkerDragEnd() {
   const markerCoords = extractCoords(markers);
   myTerritoryPolygon = drawPolygon(markerCoords, theMap, myTerritoryPolygon);
+  calculateArea();
 }
 
 function extractCoords(markers) {
   return markers.map(marker => marker.getPosition().toJSON());
 }
 
-function toggleBounce(marker) {
-  if (marker.getAnimation() !== null) {
-    marker.setAnimation(null);
-  } else {
-    marker.setAnimation(google.maps.Animation.BOUNCE);
+function calculateArea() {
+  let totalArea = 0;
+  if (markers.length > 2) {
+    totalArea = google.maps.geometry.spherical.computeArea(myTerritoryPolygon.getPath())
+    totalArea = (totalArea / 10000).toFixed(2);
+    document.querySelector("#dimensiones").value = totalArea + " hectáreas";
+    document.querySelector("#coordenadas").value = JSON.stringify(extractCoords(markers));
   }
+  let prueba = extractCoords(markers);
+  console.log(prueba);
+  return totalArea;
 }
+
+// function toggleBounce(marker) {
+//   if (marker.getAnimation() !== null) {
+//     marker.setAnimation(null);
+//   } else {
+//     marker.setAnimation(google.maps.Animation.BOUNCE);
+//   }
+// }
 
 theMap.addListener("click", function (e) {
   const coords = {
@@ -83,11 +97,8 @@ theMap.addListener("click", function (e) {
   const markerCoords = extractCoords(markers);
   myTerritoryPolygon = drawPolygon(markerCoords, theMap, myTerritoryPolygon);
 
-  if (markers.length > 1) {
-    console.log(
-      google.maps.geometry.spherical.computeArea(myTerritoryPolygon.getPath())
-    );
-  }
+  calculateArea();
+
 });
 
 document.getElementById("clear-button").onclick = function () {
