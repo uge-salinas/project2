@@ -30,7 +30,6 @@ theMap.addListener("click", function (e) {
     lat: e.latLng.lat(),
     lng: e.latLng.lng()
   };
-  // console.log(coords);
   let marker = new google.maps.Marker({
     map: theMap,
     position: coords
@@ -66,10 +65,6 @@ theMap.addListener("click", function (e) {
     for (var i = 0; i < markers.length; i++) {
       markers[i].setMap(null);
     }
-    // theMap = new google.maps.Map(mapDOM, {
-    //   zoom: 20,
-    //   center: myTerritory[myTerritory.length - 1]
-    // });
     myTerritory = [];
   };
 });
