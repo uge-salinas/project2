@@ -63,7 +63,7 @@ function toggleBounce(marker) {
   }
 }
 
-theMap.addListener("click", function(e) {
+theMap.addListener("click", function (e) {
   const coords = {
     lat: e.latLng.lat(),
     lng: e.latLng.lng()
@@ -90,7 +90,7 @@ theMap.addListener("click", function(e) {
   }
 });
 
-document.getElementById("clear-button").onclick = function() {
+document.getElementById("clear-button").onclick = function () {
   deletePolygon(myTerritoryPolygon);
   markers.map(deleteMarker);
   markers = [];

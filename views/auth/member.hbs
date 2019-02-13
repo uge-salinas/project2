@@ -1,0 +1,39 @@
+<a href="/auth/logout">Log out</a>
+
+<form action="/auth/member" method="POST">
+
+  <label for="tipo">El terreno es de regadío o secano?</label>
+
+  <input type="radio" name="tipo" value="regadio" id="regadio" checked>
+  <label for="regadio">Regadío</label>
+  <input type="radio" name="tipo" value="secano" id="secano">
+  <label for="secano">Secano</label><br>
+
+  <label for="dimensiones">Dimensiones en metros cuadrados</label>
+  <input type="number" name="dimensiones" placeholder="0" id="dimensiones">
+
+  <br>
+
+  <label for="venta">Disponible para venta o alquiler?</label>
+
+  <input type="radio" name="venta" value="venta" id="venta" checked>
+  <label for="venta">Venta</label>
+  <input type="radio" name="venta" value="alquiler" id="alquiler">
+  <label for="alquiler">Alquiler</label><br>
+
+  <label for="precio">Precio</label>
+  <input type="number" name="precio" placeholder="0" id="precio">
+
+  <br>
+  <button>Finalizar</button>
+
+  <div id="map"></div>
+
+
+  <script src='https://maps.googleapis.com/maps/api/js?key={{key}}'> </script>
+  <script src="../javascripts/script.js"></script>
+  <div id="controls">
+    <button id='clear-button'>Borrar marcación</button>
+  </div>
+
+</form>

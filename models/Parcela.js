@@ -1,11 +1,10 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const parcelaSchema = Schema({
-  regadio: Boolean,
+const parcelaSchema = new Schema({
+  tipo: String,
   dimensiones: Number,
-  venta: Boolean,
-  alquiler: Boolean,
+  venta: String,
   precio: Number
 })
 
