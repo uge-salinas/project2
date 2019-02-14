@@ -116,9 +116,15 @@ router.get("/card", ensureLogin.ensureLoggedIn(), (req, res) => {
 router.get("/card/:id", (req, res, next) => {
   Parcela.findOne({ "_id": req.params.id })
     .then((parcela) => {
-      const coordenadas = parcela.coordenadas;
-      console.log(coordenadas)
-      res.render("auth/cardMap", { key, coordenadas: JSON.stringify(coordenadas) })
+      const plotsInfo = [{
+        coordenadas: parcela.coordenadas,
+        venta: parcela.venta,
+        tipo: parcela.tipo,
+        precio: parcela.precio,
+        dimensiones: parcela.dimensiones
+      }]
+      console.log(plotsInfo)
+      res.render("auth/cardMap", { key, plotsInfo: JSON.stringify(plotsInfo) })
     })
     .catch(err => console.log(err))
 
