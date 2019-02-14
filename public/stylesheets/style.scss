@@ -1,12 +1,17 @@
+$color-bar: #00a388;
+$color-botones: #ff6138;
+$color-fondo: #ffff9d;
+$color-letra: #beeb9f;
+$color-letra2: #79bd8f;
 body {
   padding: 0;
   margin: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: #ffff9d;
+  background-color: $color-fondo;
 }
 
 a {
-  color: #00b7ff;
+  color: $color-letra2;
 }
 
 #map {
@@ -15,7 +20,7 @@ a {
 
 .menu-bar {
   padding: 0;
-  background-color: #00a388;
+  background-color: $color-bar;
   margin: 0;
 }
 
@@ -30,4 +35,51 @@ a {
 
 .vista_parcelas {
   display: flex;
+}
+
+button {
+  font-size: 30px;
+  width: 400px;
+  height: 50px;
+  color: white;
+  border-radius: 25px;
+  background-color: $color-botones;
+  margin-bottom: 30px;
+  margin: auto;
+  display: block;
+}
+.log {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 30px;
+  margin: 10px;
+  padding-top: 100px;
+}
+
+.form {
+  flex-direction: column;
+  display: flex;
+  margin: 30px;
+  color: $color-letra2;
+}
+.form-member {
+  flex-direction: column;
+  display: flex;
+  margin: 30px;
+  color: $color-letra2;
+}
+.log-member {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 30px;
+  margin: 10px;
+  padding-top: 100px;
+}
+input {
+  font-size: 25px;
+  height: 35px;
 }
