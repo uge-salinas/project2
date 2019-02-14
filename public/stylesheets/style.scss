@@ -36,6 +36,9 @@ a {
 .vista_parcelas {
   display: flex;
 }
+.col-3 {
+  margin-top: 20px;
+}
 
 button {
   font-size: 30px;
@@ -94,4 +97,12 @@ input {
 }
 .controls-members {
   align-self: flex-end;
+}
+
+#toHide {
+  display: flex;
+}
+nav {
+  display: flex;
+  justify-content: center;
 }
