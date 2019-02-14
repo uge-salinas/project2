@@ -6,7 +6,10 @@ const parcelaSchema = new Schema({
   dimensiones: String,
   venta: String,
   precio: Number,
-  coordenadas: Array
+  coordenadas: Array,
+  //userEmail: { type: Schema.Types.ObjectId, ref: "User" },
+  userID: { type: Schema.Types.ObjectId, ref: "User" }
+
 })
 
 const Parcela = mongoose.model("Parcela", parcelaSchema);

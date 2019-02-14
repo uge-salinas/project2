@@ -87,13 +87,17 @@ router.post("/member", (req, res, next) => {
   const venta = req.body.venta;
   const precio = req.body.precio;
   const coordenadas = JSON.parse(req.body.coordenadas);
+  //const userEmail = req.user.email;
+  const userID = req.user.id;
 
   const nuevaParcela = new Parcela({
     tipo,
     dimensiones,
     venta,
     precio,
-    coordenadas
+    coordenadas,
+    //userEmail,
+    userID
   });
 
   nuevaParcela
@@ -112,9 +116,11 @@ router.get("/logout", (req, res) => {
 //CARDS
 
 router.get("/card", ensureLogin.ensureLoggedIn(), (req, res) => {
-  Parcela.find().then(parcelas => {
-    res.render("auth/card", { parcelas });
-  });
+  Parcela.find()
+    .then(parcelas => {
+      res.render("auth/card", { parcelas });
+    })
+    .catch(() => res.redirect("/auth/login"))
 });
 
 //INDIVIDUAL INFO AND MAP
@@ -132,8 +138,17 @@ router.get("/card/:id", (req, res, next) => {
       console.log(plotsInfo)
       res.render("auth/cardMap", { key, plotsInfo: JSON.stringify(plotsInfo) })
     })
-    .catch(err => console.log(err))
+    .catch(() => res.redirect("/auth/login"))
 
+})
+
+//VIEW JUST THEIR OWN PROPERTIES
+
+router.get("/mine", (req, res, next) => {
+  Parcela.find({ userID: req.user.id })
+    .populate("userID")
+    .then((parcelas) => res.render("auth/mine", { parcelas }))
+    .catch(err => console.log(err))
 })
 
 module.exports = router;
