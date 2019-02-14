@@ -26,6 +26,9 @@ a {
 .vista_parcelas {
   display: flex; }
 
+.col-3 {
+  margin-top: 20px; }
+
 button {
   font-size: 30px;
   width: 400px;
