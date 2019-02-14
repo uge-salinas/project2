@@ -5,6 +5,7 @@ const User = require("../models/User");
 const Parcela = require("../models/Parcela");
 const ensureLogin = require("connect-ensure-login");
 const key = process.env.KEYMAP;
+const nodemailer = require("nodemailer");
 
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
@@ -123,6 +124,7 @@ router.get("/card", ensureLogin.ensureLoggedIn(), (req, res) => {
     .catch(() => res.redirect("/auth/login"))
 });
 
+
 //INDIVIDUAL INFO AND MAP
 
 router.get("/card/:id", (req, res, next) => {
@@ -150,5 +152,30 @@ router.get("/mine", (req, res, next) => {
     .then((parcelas) => res.render("auth/mine", { parcelas }))
     .catch(err => console.log(err))
 })
+
+//CONTACT OWNER
+
+// router.get("/contact", (req, res, next) => res.render("auth/contact"))
+
+// router.post("/contact", (req, res, next) => {
+//   let receiver = document.getElementById("receiverEmail").value;
+//   console.log(receiver);
+//   let transporter = nodemailer.createTransport({
+//     service: "Gmail",
+//     auth: {
+//       user: 'pruebanodemailer0119@gmail.com',
+//       pass: 'Prueba-nodemailer-0119'
+//     }
+//   })
+//   transporter.sendMail({
+//     from: '"My Awesome Project 👻" <myawesome@project.com>',
+//     to: receiver,
+//     subject: "Tienes una pregunta sobre tu parcela",
+//     text: req.body.message,
+//     html: req.body.message
+//   })
+//     .then(() => res.redirect("/"))
+//     .catch(error => console.log(error))
+// })
 
 module.exports = router;
