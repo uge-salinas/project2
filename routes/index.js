@@ -6,12 +6,18 @@ const Parcela = require("../models/Parcela");
 
 /* GET home page */
 router.get("/", (req, res, next) => {
-
-  Parcela.find()
-    .then((parcelas) => {
-      let coordenadas = parcelas.map(parcela => parcela.coordenadas);
-      res.render("index", { key, coordenadas: JSON.stringify(coordenadas) })
-    })
-})
+  Parcela.find().then(plots => {
+    const plotsInfo = plots.map(
+      ({ coordenadas, venta, tipo, precio, dimensiones }) => ({
+        coordenadas,
+        venta,
+        tipo,
+        precio,
+        dimensiones
+      })
+    );
+    res.render("index", { key, plotsInfo: JSON.stringify(plotsInfo) });
+  });
+});
 
 module.exports = router;

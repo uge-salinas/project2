@@ -5,7 +5,7 @@ body {
   background-color: #ffff9d; }
 
 a {
-  color: #00b7ff; }
+  color: #79bd8f; }
 
 #map {
   height: 500px; }
@@ -25,5 +25,50 @@ a {
 
 .vista_parcelas {
   display: flex; }
+
+button {
+  font-size: 30px;
+  width: 400px;
+  height: 50px;
+  color: white;
+  border-radius: 25px;
+  background-color: #ff6138;
+  margin-bottom: 30px;
+  margin: auto;
+  display: block; }
+
+.log {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 30px;
+  margin: 10px;
+  padding-top: 100px; }
+
+.form {
+  flex-direction: column;
+  display: flex;
+  margin: 30px;
+  color: #79bd8f; }
+
+.form-member {
+  flex-direction: column;
+  display: flex;
+  margin: 30px;
+  color: #79bd8f; }
+
+.log-member {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 30px;
+  margin: 10px;
+  padding-top: 100px; }
+
+input {
+  font-size: 25px;
+  height: 35px; }
 
 /*# sourceMappingURL=style.css.map */

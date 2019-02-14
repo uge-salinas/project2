@@ -1,25 +1,28 @@
-<form action="/auth/signup" method="POST">
+<div class="log">
+  <form action="/auth/signup" method="POST">
 
-  <label for="username">Nombre de usuario</label>
-  <input type="text" name="username" id="username" placeholder="Escriba su nombre de usuario aquí">
+    <div class="form">
+      <label for="username">Nombre de usuario </label>
+      <input type="text" name="username" id="username" placeholder="Escriba su nombre de usuario aquí">
+    </div>
+    <div class="form">
+      <label for="password">Contraseña </label>
+      <input type="password" name="password" id="password" placeholder="******">
+    </div>
+    <div class="form">
+      <label for="email">E-mail </label>
+      <input type="email" name="email" id="email" placeholder="miemail@mydomain.com">
+    </div>
 
-  <label for="password">Contraseña</label>
-  <input type="password" name="password" id="password" placeholder="******">
-
-  <label for="email">E-mail</label>
-  <input type="email" name="email" id="email" placeholder="miemail@mydomain.com">
-
-  <br>
-  {{#if message }}
-  {{ message }}
-  {{/if}}
-
-  <br><br>
-
-  <button>Completa tu registro</button>
-
-  <p>Ya tienes una cuenta?
-    <a href="/auth/login">Inicia sesión</a>
-  </p>
-
-</form>
+    {{#if message }}
+    {{ message }}
+    {{/if}}
+    <br>
+    <button>Completa tu registro</button>
+    <div class="form">
+      <p>Ya tienes una cuenta?
+        <a href="/auth/login">Inicia sesión</a>
+      </p>
+    </div>
+  </form>
+</div>

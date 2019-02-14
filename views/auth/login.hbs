@@ -1,21 +1,23 @@
-<form action="/auth/login" method="POST">
+<div class="log">
+  <form action="/auth/login" method="POST">
+    <div class="form">
+      <label for="username">Nombre de usuario</label>
+      <input type="text" name="username" id="username" placeholder="Escriba aquí su nombre de usuario">
+    </div>
+    <div class="form">
+      <label for="password">Contraseña</label>
+      <input type="password" id="password" name="password" placeholder="*****">
+    </div>
+    <br>
+    {{#if message }}
+    <div class="error-message">{{ message }}</div>
+    {{/if}}
 
-  <label for="username">Nombre de usuario</label>
-  <input type="text" name="username" id="username" placeholder="Escriba aquí su nombre de usuario">
-
-  <label for="password">Contraseña</label>
-  <input type="password" id="password" name="password" placeholder="*****">
-
-  <br>
-  {{#if message }}
-  <div class="error-message">{{ message }}</div>
-  {{/if}}
-
-  <br><br>
-
-  <button>Log In</button>
-  <p>No tienes una cuenta?
-    <a href="/auth/signup">Regístrate</a>
-  </p>
-
-</form>
+    <button>Log In</button>
+    <div class="form">
+      <p>No tienes una cuenta?
+        <a href="/auth/signup">Regístrate</a>
+      </p>
+    </div>
+  </form>
+</div>
