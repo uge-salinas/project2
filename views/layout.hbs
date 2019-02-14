@@ -10,23 +10,23 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
   <link rel="stylesheet" href="/stylesheets/style.css" />
-  
 </head>
 
 <body>
 
   <nav class="menu-bar">
     <a href="/">Home</a>
+    {{#is user "no-user"}}
     <a href="/auth/signup">Sign Up</a>
     <a href="/auth/login">Log In</a>
+    {{else}}
     <a href="/auth/logout">Log out</a>
     <a href="/auth/card">Mostrar Parcelas</a>
+    {{/is}}
 
   </nav>
 
   {{{body}}}
-
-
 </body>
 
 </html>

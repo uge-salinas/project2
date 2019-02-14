@@ -11,9 +11,10 @@ const hbs = require("hbs");
 const mongoose = require("mongoose");
 const logger = require("morgan");
 const path = require("path");
+const swag = require("swag");
 
 mongoose
-  .connect("process.env.DBURL", { useNewUrlParser: true })
+  .connect(process.env.DBURL, { useNewUrlParser: true })
   .then(x => {
     console.log(
       `Connected to Mongo! Database name: "${x.connections[0].name}"`
@@ -45,6 +46,7 @@ app.use(
     sourceMap: true
   })
 );
+swag.registerHelpers(hbs);
 
 hbs.registerHelper("ifUndefined", (value, options) => {
   if (arguments.length < 2)
@@ -75,6 +77,14 @@ app.use(
 );
 app.use(flash());
 require("./passport")(app);
+
+app.use((req, res, next) => {
+  app.locals.user = req.user
+  if (req.user == undefined) {
+    app.locals.user = "no-user"
+  }
+  next()
+})
 
 const index = require("./routes/index");
 app.use("/", index);
