@@ -87,7 +87,7 @@ router.post("/member", (req, res, next) => {
   const venta = req.body.venta;
   const precio = req.body.precio;
   const coordenadas = JSON.parse(req.body.coordenadas);
-  //const userEmail = req.user.email;
+  const userEmail = req.user.email;
   const userID = req.user.id;
 
   const nuevaParcela = new Parcela({
@@ -96,7 +96,7 @@ router.post("/member", (req, res, next) => {
     venta,
     precio,
     coordenadas,
-    //userEmail,
+    userEmail,
     userID
   });
 

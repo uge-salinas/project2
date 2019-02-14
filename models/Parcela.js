@@ -7,7 +7,7 @@ const parcelaSchema = new Schema({
   venta: String,
   precio: Number,
   coordenadas: Array,
-  //userEmail: { type: Schema.Types.ObjectId, ref: "User" },
+  userEmail: String,
   userID: { type: Schema.Types.ObjectId, ref: "User" }
 
 })
