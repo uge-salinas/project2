@@ -69,10 +69,16 @@ router.post(
   })
 );
 
+//DISPLAY OR HIDE ELEMENTS
+
+router.get('/logueado', ensureLogin.ensureLoggedIn(), (req, res, next) => {
+  res.send(JSON.stringify({ log: true }))
+})
 //MEMBER'S SITE
 
-router.get("/member", ensureLogin.ensureLoggedIn(), (req, res, next) =>
+router.get("/member", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   res.render("auth/member", { key })
+}
 );
 
 router.post("/member", (req, res, next) => {
@@ -110,5 +116,24 @@ router.get("/card", ensureLogin.ensureLoggedIn(), (req, res) => {
     res.render("auth/card", { parcelas });
   });
 });
+
+//INDIVIDUAL INFO AND MAP
+
+router.get("/card/:id", (req, res, next) => {
+  Parcela.findOne({ "_id": req.params.id })
+    .then((parcela) => {
+      const plotsInfo = [{
+        coordenadas: parcela.coordenadas,
+        venta: parcela.venta,
+        tipo: parcela.tipo,
+        precio: parcela.precio,
+        dimensiones: parcela.dimensiones
+      }]
+      console.log(plotsInfo)
+      res.render("auth/cardMap", { key, plotsInfo: JSON.stringify(plotsInfo) })
+    })
+    .catch(err => console.log(err))
+
+})
 
 module.exports = router;

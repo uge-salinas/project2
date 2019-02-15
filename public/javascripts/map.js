@@ -27,13 +27,17 @@ function drawPolygon({
     fillOpacity: 0.35
   });
   newPolygon.setMap(map);
-  newPolygon.addListener('click', onClick);
+  newPolygon.addListener("click", onClick);
   return newPolygon;
 }
 
 function onMarkerDragEnd() {
   const markerCoords = extractCoords(markers);
-  myTerritoryPolygon = drawPolygon({ coordsList: markerCoords, map: theMap, currentPolygon: myTerritoryPolygon });
+  myTerritoryPolygon = drawPolygon({
+    coordsList: markerCoords,
+    map: theMap,
+    currentPolygon: myTerritoryPolygon
+  });
   calculateArea();
 }
 
@@ -64,4 +68,16 @@ function toggleBounce(marker) {
   } else {
     marker.setAnimation(google.maps.Animation.BOUNCE);
   }
+}
+
+function computeCenter(arrCoords) {
+  const totalCoords = arrCoords.length;
+  return arrCoords.reduce(
+    (acc, coord) => {
+      let lat = acc.lat + coord.lat / totalCoords;
+      let lng = acc.lng + coord.lng / totalCoords;
+      return { lat, lng };
+    },
+    { lat: 0, lng: 0 }
+  );
 }

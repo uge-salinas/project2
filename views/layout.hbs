@@ -10,25 +10,24 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
   <link rel="stylesheet" href="/stylesheets/style.css" />
-  <script src="../javascripts/map.js"></script>
 </head>
 
 <body>
 
   <nav class="menu-bar">
     <a href="/">Home</a>
-    <div id="toHide">
-      <a href="/auth/signup">Sign Up</a>
-      <a href="/auth/login">Log In</a>
-    </div>
-    <a href="/auth/logout">Log out</a>
+    {{#is user "no-user"}}
+    <a href="/auth/signup">Sign Up</a>
+    <a href="/auth/login">Log In</a>
+    {{else}}
+    <a href="/auth/member">Crear Parcela</a>
     <a href="/auth/card">Mostrar Parcelas</a>
+    <a href="/auth/logout">Log out</a>
+    {{/is}}
 
   </nav>
 
   {{{body}}}
-
-
 </body>
 
 </html>
