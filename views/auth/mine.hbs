@@ -1,26 +1,25 @@
-<h1>Mis parcelas</h1>
-{{!-- <div class="container vista_parcelas">
-  <div class="row"> --}}
-{{#each parcelas}}
-<div class="col-3">
-  <div class="card plot-card">
-    {{!-- <img class="card-img-top" src="85cdca8088322c299b99cde3a64807ae.jpg" alt="Card image cap" /> --}}
-    <div class="card-body">
-      <h5 class="card-title">Dimensiones: {{this.dimensiones}}</h5>
-      {{!-- <p class="card-text">
+<div class="container vista_parcelas">
+  <div class="row">
+    {{#each parcelas}}
+    <div class="col-3">
+      <div class="card plot-card">
+        {{!-- <img class="card-img-top" src="85cdca8088322c299b99cde3a64807ae.jpg" alt="Card image cap" /> --}}
+        <div class="card-body">
+          <h5 class="card-title">Dimensiones: {{this.dimensiones}}</h5>
+          {{!-- <p class="card-text">
         Informacion adicional
       </p> --}}
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Tipo: {{this.tipo}}</li>
+          <li class="list-group-item">Disponibilidad: {{this.venta}}</li>
+          <li class="list-group-item">Precio: {{this.precio}} €</li>
+        </ul>
+        <div class="list-group-item">
+          <a href="/auth/card/{{this.id}}" class="card-link">Localizar</a>
+        </div>
+      </div>
     </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">Tipo: {{this.tipo}}</li>
-      <li class="list-group-item">Disponibilidad: {{this.venta}}</li>
-      <li class="list-group-item">Precio: {{this.precio}} €</li>
-    </ul>
-    <div class="list-group-item">
-      <a href="/auth/card/{{this.id}}" class="card-link">Localizar</a>
-    </div>
+    {{/each}}
   </div>
 </div>
-{{/each}}
-{{!-- </div>
-</div> --}}
