@@ -10,6 +10,16 @@ body {
   background-color: $color-fondo;
 }
 
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  flex-direction: column;
+  margin: 30px;
+  color: $color-letra2;
+}
+
 a {
   color: $color-letra2;
 }

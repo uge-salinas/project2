@@ -4,6 +4,15 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: #ffff9d; }
 
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  flex-direction: column;
+  margin: 30px;
+  color: #79bd8f; }
+
 a {
   color: #79bd8f; }
 
