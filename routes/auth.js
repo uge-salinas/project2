@@ -5,6 +5,7 @@ const User = require("../models/User");
 const Parcela = require("../models/Parcela");
 const ensureLogin = require("connect-ensure-login");
 const key = process.env.KEYMAP;
+const nodemailer = require("nodemailer");
 
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
@@ -69,10 +70,16 @@ router.post(
   })
 );
 
+//DISPLAY OR HIDE ELEMENTS
+
+router.get('/logueado', ensureLogin.ensureLoggedIn(), (req, res, next) => {
+  res.send(JSON.stringify({ log: true }))
+})
 //MEMBER'S SITE
 
-router.get("/member", ensureLogin.ensureLoggedIn(), (req, res, next) =>
+router.get("/member", ensureLogin.ensureLoggedIn(), (req, res, next) => {
   res.render("auth/member", { key })
+}
 );
 
 router.post("/member", (req, res, next) => {
@@ -81,13 +88,17 @@ router.post("/member", (req, res, next) => {
   const venta = req.body.venta;
   const precio = req.body.precio;
   const coordenadas = JSON.parse(req.body.coordenadas);
+  const userEmail = req.user.email;
+  const userID = req.user.id;
 
   const nuevaParcela = new Parcela({
     tipo,
     dimensiones,
     venta,
     precio,
-    coordenadas
+    coordenadas,
+    userEmail,
+    userID
   });
 
   nuevaParcela
@@ -106,9 +117,65 @@ router.get("/logout", (req, res) => {
 //CARDS
 
 router.get("/card", ensureLogin.ensureLoggedIn(), (req, res) => {
-  Parcela.find().then(parcelas => {
-    res.render("auth/card", { parcelas });
-  });
+  Parcela.find()
+    .then(parcelas => {
+      res.render("auth/card", { parcelas });
+    })
+    .catch(() => res.redirect("/auth/login"))
 });
+
+
+//INDIVIDUAL INFO AND MAP
+
+router.get("/card/:id", (req, res, next) => {
+  Parcela.findOne({ "_id": req.params.id })
+    .then((parcela) => {
+      const plotsInfo = [{
+        coordenadas: parcela.coordenadas,
+        venta: parcela.venta,
+        tipo: parcela.tipo,
+        precio: parcela.precio,
+        dimensiones: parcela.dimensiones
+      }]
+      console.log(plotsInfo)
+      res.render("auth/cardMap", { key, plotsInfo: JSON.stringify(plotsInfo) })
+    })
+    .catch(() => res.redirect("/auth/login"))
+
+})
+
+//VIEW JUST THEIR OWN PROPERTIES
+
+router.get("/mine", (req, res, next) => {
+  Parcela.find({ userID: req.user.id })
+    .populate("userID")
+    .then((parcelas) => res.render("auth/mine", { parcelas }))
+    .catch(err => console.log(err))
+})
+
+//CONTACT OWNER
+
+// router.get("/contact", (req, res, next) => res.render("auth/contact"))
+
+// router.post("/contact", (req, res, next) => {
+//   let receiver = document.getElementById("receiverEmail").value;
+//   console.log(receiver);
+//   let transporter = nodemailer.createTransport({
+//     service: "Gmail",
+//     auth: {
+//       user: 'pruebanodemailer0119@gmail.com',
+//       pass: 'Prueba-nodemailer-0119'
+//     }
+//   })
+//   transporter.sendMail({
+//     from: '"My Awesome Project 👻" <myawesome@project.com>',
+//     to: receiver,
+//     subject: "Tienes una pregunta sobre tu parcela",
+//     text: req.body.message,
+//     html: req.body.message
+//   })
+//     .then(() => res.redirect("/"))
+//     .catch(error => console.log(error))
+// })
 
 module.exports = router;

@@ -10,6 +10,16 @@ body {
   background-color: $color-fondo;
 }
 
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  flex-direction: column;
+  margin: 30px;
+  color: $color-letra2;
+}
+
 a {
   color: $color-letra2;
 }
@@ -35,6 +45,13 @@ a {
 
 .vista_parcelas {
   display: flex;
+}
+.col-3 {
+  margin-top: 20px;
+}
+
+.col-3 {
+  margin-top: 20px;
 }
 
 button {
@@ -94,4 +111,12 @@ input {
 }
 .controls-members {
   align-self: flex-end;
+}
+
+#toHide {
+  display: flex;
+}
+nav {
+  display: flex;
+  justify-content: center;
 }
